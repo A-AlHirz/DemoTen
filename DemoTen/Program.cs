@@ -50,8 +50,11 @@ for (int i = 1; i <=count; i++)
     Console.WriteLine("Enter product quantity");
     int Qty = Convert.ToInt32(Console.ReadLine());
 
-    product.AddProduct(ProductName, Price, Qty);
+    Console.WriteLine("Enter product if in stock");
+    bool InStock = Convert.ToBoolean(Console.ReadLine());
+    product.AddProduct(ProductName, Price, Qty, InStock);
 }
 product.DisplayProducts();
 
 #endregion
+

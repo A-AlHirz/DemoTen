@@ -38,25 +38,37 @@ namespace DemoTen.Models
         public string Name { get; set; }
         public double Price { get; set; }
         public int Qty { get; set; }
+        public bool InStock { get; set; }
 
         //Declare List of products
         List<Product> products = new List<Product>();
 
-        public void AddProduct(string name, double price, int qty)
+        public void AddProduct(string name, double price, int qty, bool inStock)
         {
-            products.Add(new Product { Name = name, Price = price, Qty = qty });
+            products.Add(new Product { Name = name, Price = price, Qty = qty, InStock = inStock });
         }
 
         public void DisplayProducts()
         {
+            int countIn=0;
+
             Console.WriteLine("-----------------Products-----------------");
             foreach (Product item in products)
             {
-                Console.WriteLine($"Product Name: {item.Name}, Price: {item.Price}, Qty: {item.Qty}, Total: {CalcTotal(item.Qty, item.Price)}");
+                if (item.InStock)
+                {
+                    countIn++;
+                    Console.WriteLine($"Product Name: {item.Name}, Price: {item.Price}, Qty: {item.Qty}, Total: {CalcTotal(item.Qty, item.Price)}, In Stock ");
+
+                }
+                else
+                {
+                    Console.WriteLine($"Product Name: {item.Name}, Price: {item.Price}, Qty: {item.Qty}, Total: {CalcTotal(item.Qty, item.Price)}, Out of Stock ");
+                }
             }
-        }
 
-
+            Console.WriteLine("Total items: " + products.Count+"and in stock "+countIn + "out of stock " +(products.Count - countIn));
+        } 
 
     }
 
